@@ -98,38 +98,15 @@ def data_generator(captions, images, tokenizer, max_caption_length):
 			encoder_input, decoder_input, decoder_output = make_batch(tokenizer, max_caption_length, captions_list, image)
 			yield [[encoder_input, decoder_input], decoder_output]
 
-# def make_batch(data, batch_size=BATCH_SIZE):
-# 	index = 0
-# 	try:
-# 		while True:
-# 			batch = []
-# 			label_batch = []
-# 			lengths = []
-			
-# 			for i in range(batch_size):
-# 				current = []
-# 				current_label = []
 
-# 				for j in range(WINDOW_SIZE):
-# 					current.append(vocabulary[data[index]])
-# 					current_label.append(vocabulary[data[index + 1]])
-# 					index += 1
-
-# 				batch.append(current)
-# 				label_batch.append(current_label)
-# 				lengths.append(WINDOW_SIZE)
-
-# 			yield batch, label_batch, lengths
-# 	except IndexError:
-# 		return
-
-
+# for the working with the local files on a computer
 # with open('Flickr_8k.trainImages.txt', 'r') as f:
 # 	trainImages = f.read()
 
 # with open('Flickr_8k.testImages.txt', 'r') as f:
 # 	testImages = f.read()
 
+#for GCP
 with open('Flickr8k_text/Flickr_8k.trainImages.txt', 'r') as f:
 	trainImages = f.read()
 
@@ -158,14 +135,6 @@ captions = load(open("captions.pkl", 'rb'))
 # for key in list(captions)[:5]: print(key, captions[key])
 train_captions = {k: captions[k] for k in train_img_names if not(k == '')}
 test_captions = {k: captions[k] for k in test_img_names if not(k == '')}
-
-# convert to word id's (not used anymore)
-# i = 2
-# word2id = {"START": 0, "STOP": 1}
-# for word in vocabulary:
-# 	if word not in word2id:
-# 		word2id[word] = i
-# 		i += 1
 
 # make a list of captions from the dict for input into tokenizer
 # flatten the list
